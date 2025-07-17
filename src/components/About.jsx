@@ -3,10 +3,16 @@ import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 import { Box, Text } from '@react-three/drei';
-import { Code, Palette, Zap, Users } from 'lucide-react';
+import { Html } from '@react-three/drei';
+import { Code, Palette, Zap } from 'lucide-react';
+// Import react-icons for tech stack icons
+import { FaReact, FaJs, FaHtml5, FaNodeJs, FaUsers } from 'react-icons/fa';
+import { SiTailwindcss, SiExpress, SiMongodb } from 'react-icons/si';
+import { FaGitAlt, FaGithub } from 'react-icons/fa';
+import { SiPostman, SiVscodium } from 'react-icons/si';
 
 // 3D Skill Cube Component
-const SkillCube = function({ position, color, skill }) {
+const SkillCube = function({ position, color, icon: Icon }) {
   const [spring, api] = useSpring(() => ({
     rotation: [0, 0, 0],
     scale: 1,
@@ -26,15 +32,10 @@ const SkillCube = function({ position, color, skill }) {
       <Box args={[1, 1, 1]}>
         <meshStandardMaterial color={color} />
       </Box>
-      <Text
-        position={[0, 0, 0.6]}
-        fontSize={0.2}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {skill}
-      </Text>
+      {/* Render the icon in the center of the cube, fallback to text if icon is missing */}
+      <Html position={[0, 0, 0.6]} center>
+        {Icon ? <Icon size={28} className="text-white" /> : <span style={{color: 'white'}}>?</span>}
+      </Html>
     </animated.mesh>
   );
 };
@@ -85,12 +86,63 @@ const extras = [
   'Runner-up in SEGA Football 2022',
 ];
 
+// Icon color map for tech stack
+const techIconColors = {
+  React: '#61DAFB',
+  JavaScript: '#F7DF1E',
+  'Tailwind CSS': '#38BDF8',
+  HTML5: '#E34F26',
+  'Node.js': '#3C873A',
+  'Express.js': '#888888',
+  MongoDB: '#47A248',
+};
+
+// Add icon colors for Dev Tools
+techIconColors.Git = '#F05032';
+techIconColors.GitHub = '#181717';
+techIconColors['Postman'] = '#FF6C37';
+techIconColors['VS Code'] = '#007ACC';
+
 const About = function() {
   const skills = [
-    { name: 'Frontend', icon: Code, color: '#0ea5e9', description: 'React, JavaScript, Tailwind CSS,HTML5' },
-    { name: 'Design', icon: Palette, color: '#8b5cf6', description: 'UI/UX, Figma, Adobe' },
-    { name: 'Backend', icon: Zap, color: '#10b981', description: 'Node.js, Express.js,MongoDB' },
-    { name: 'Team', icon: Users, color: '#f59e0b', description: 'Agile, Leadership' },
+    {
+      name: 'Frontend',
+      icon: Code,
+      color: '#0ea5e9',
+      techIcons: [
+        { icon: FaReact, label: 'React' },
+        { icon: FaJs, label: 'JavaScript' },
+        { icon: SiTailwindcss, label: 'Tailwind CSS' },
+        { icon: FaHtml5, label: 'HTML5' },
+      ],
+    },
+    {
+      name: 'Design',
+      icon: Palette,
+      color: '#8b5cf6',
+      description: 'UI/UX, Figma, Adobe',
+    },
+    {
+      name: 'Backend',
+      icon: Zap,
+      color: '#10b981',
+      techIcons: [
+        { icon: FaNodeJs, label: 'Node.js' },
+        { icon: SiExpress, label: 'Express.js' },
+        { icon: SiMongodb, label: 'MongoDB' },
+      ],
+    },
+    {
+      name: 'Dev Tools',
+      icon: FaUsers,
+      color: '#f59e0b',
+      techIcons: [
+        { icon: FaGitAlt, label: 'Git' },
+        { icon: FaGithub, label: 'GitHub' },
+        { icon: SiPostman, label: 'Postman' },
+        { icon: SiVscodium, label: 'VS Code' },
+      ],
+    },
   ];
 
   const containerVariants = {
@@ -129,10 +181,10 @@ const About = function() {
             <Canvas camera={{ position: [0, 0, 8] }}>
               <ambientLight intensity={0.5} />
               <pointLight position={[10, 10, 10]} />
-              <SkillCube position={[-2, 1, 0]} color="#0ea5e9" skill="React" />
-              <SkillCube position={[2, 1, 0]} color="#8b5cf6" skill="3D" />
-              <SkillCube position={[-2, -1, 0]} color="#10b981" skill="Node" />
-              <SkillCube position={[2, -1, 0]} color="#f59e0b" skill="Team" />
+              <SkillCube position={[-2, 1, 0]} color="#0ea5e9" icon={Code} />
+              <SkillCube position={[2, 1, 0]} color="#8b5cf6" icon={Palette} />
+              <SkillCube position={[-2, -1, 0]} color="#10b981" icon={Zap} />
+              <SkillCube position={[2, -1, 0]} color="#f59e0b" icon={FaUsers} />
             </Canvas>
           </motion.div>
 
@@ -161,22 +213,10 @@ const About = function() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-lg text-gray-300 leading-relaxed"
             >
-              I'm a passionate Full Stack Developer with over 5 years of experience creating 
-              innovative digital solutions. My journey in tech started with a curiosity about 
-              how things work, which evolved into a love for building user-centric applications 
-              that make a difference.
+              I'm a dedicated Full Stack Developer with 1+ years of experience crafting modern, scalable web applications. What began as a simple curiosity about technology quickly turned into a passion for building meaningful, user-focused digital products. Outside of coding, I enjoy staying updated with emerging technologies, exploring AI tools, and sharing knowledge with upcoming developers. I’m always looking for new challenges that push me to grow and create impact through tech.
             </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg text-gray-300 leading-relaxed"
-            >
-              When I'm not coding, you'll find me exploring the latest in 3D graphics, 
-              experimenting with new technologies, or mentoring junior developers. I believe 
-              in continuous learning and pushing the boundaries of what's possible on the web.
-            </motion.p>
+            
 
             {/* Skills Grid */}
             <motion.div
@@ -195,7 +235,18 @@ const About = function() {
                     <skill.icon size={24} className="text-primary-400" />
                     <div>
                       <h3 className="font-semibold text-white">{skill.name}</h3>
-                      <p className="text-sm text-gray-400">{skill.description}</p>
+                      {/* Show icons for Frontend and Backend */}
+                      {skill.techIcons ? (
+                        <div className="flex gap-2 mt-1">
+                          {skill.techIcons.map(({ icon: Icon, label }) => (
+                            <span key={label} title={label} className="text-xl" style={{ color: techIconColors[label] || '#38bdf8' }}>
+                              <Icon />
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-400">{skill.description}</p>
+                      )}
                     </div>
                   </div>
                 </motion.div>

@@ -24,13 +24,12 @@ const ProjectCube3D = ({ position, project, color, onProjectClick }) => {
 
   return (
     <animated.mesh position={position} rotation={spring.rotation} scale={spring.scale} onClick={handleClick}>
-      <Box args={[2, 2, 0.2]}>
+      <Box args={[2.8, 2.8, 0.2]}>
         <meshStandardMaterial color={color} />
       </Box>
-      <Html position={[0, 0, 0.11]} center>
-        <div className="text-center text-white text-xs p-2">
+      <Html position={[0, 0, 0.16]} center>
+        <div className="text-center text-white text-sm p-2">
           <div className="font-bold mb-1">{project.title}</div>
-          <div className="text-xs opacity-80">Click to view</div>
         </div>
       </Html>
     </animated.mesh>
@@ -117,17 +116,6 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   <Github size={20} />
                   View Code
                 </motion.a>
-                <motion.a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
-                >
-                  <ExternalLink size={20} />
-                  Live Demo
-                </motion.a>
               </div>
             </div>
           </motion.div>
@@ -204,7 +192,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative h-96 mb-12"
+          className="relative h-96 mb-4"
         >
           <Canvas camera={{ position: [0, 0, 12] }}>
             <ambientLight intensity={0.5} />
@@ -244,12 +232,14 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div 
-                className="h-48 bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center"
+                className="h-48 bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center relative group"
                 style={{ background: `linear-gradient(135deg, ${project.color}40, ${project.color}80)` }}
               >
                 <div className="text-white text-center">
                   <Eye size={48} className="mx-auto mb-2 opacity-50" />
-                  <p className="text-sm opacity-70">Click to view</p>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 cursor-pointer">
+                  <span className="text-white text-base font-semibold">Click to view</span>
                 </div>
               </div>
 
@@ -277,17 +267,7 @@ const Projects = () => {
                   )}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-2">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 px-3 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm rounded-lg transition-colors flex items-center justify-center gap-1"
-                  >
-                    <Eye size={16} />
-                    View Details
-                  </motion.button>
-                </div>
+                {/* No action buttons, card is clickable */}
               </div>
             </motion.div>
           ))}

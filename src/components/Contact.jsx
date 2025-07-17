@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 import { Box, Text } from '@react-three/drei';
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 // 3D Form Element Component
 const FormElement3D = ({ position, label, type, color }) => {
@@ -58,7 +59,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -99,10 +99,20 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    // Replace these with your EmailJS values
+    const SERVICE_ID = 'service_0wa4uv8';
+    const TEMPLATE_ID = 'template_q3eemkw';
+    const USER_ID = 'UUc4g1VsWEo6gDsQg';
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await emailjs.sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        formRef.current,
+        USER_ID
+      );
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setSubmitStatus('idle'), 3000);
     } catch (error) {
       setSubmitStatus('error');
@@ -174,7 +184,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-dark-700 border border-gray-600 rounded-lg text-white placeholder-gray-400"
-                    placeholder="your.email@example.com"
+                    placeholder="Enter your email"
                   />
                 </motion.div>
               </div>
@@ -184,18 +194,6 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-700 border border-gray-600 rounded-lg text-white placeholder-gray-400"
-                  placeholder="What's this about?"
-                />
               </motion.div>
 
               <motion.div
@@ -213,7 +211,7 @@ const Contact = () => {
                   required
                   rows={6}
                   className="w-full px-4 py-3 bg-dark-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder="Messege"
                 />
               </motion.div>
 
