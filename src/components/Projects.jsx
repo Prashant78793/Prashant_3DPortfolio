@@ -131,10 +131,8 @@ const Projects = () => {
       id: 1,
       title: 'Gym Equipment E-Commerce',
       year: 2025,
-      description: 'Admin Dashboard, Inventory & Orders, Search/Filter',
-      technologies: ['React', 'JS', 'MongoDB'],
-      techStack: ['React', 'JS', 'MongoDB'],
-      features: ['Admin Dashboard', 'Inventory & Orders', 'Search/Filter'],
+      description: 'Admin Dashboard for e-commerce with inventory, orders, filtering & sorting features.',
+      technologies: ['React', 'JavaScript', 'Tailwind CSS', 'MongoDB'],
       github: 'https://github.com/Prashant78793/gym-equipment-ecommerce.github.io',
       demo: '',
       color: '#0ea5e9',
@@ -144,14 +142,23 @@ const Projects = () => {
       id: 2,
       title: 'Redtape Clone',
       year: 2024,
-      description: 'Product listing, filtering, authentication',
+      description: 'MERN Stack e-commerce clone with product listing, filtering, and authentication.',
       technologies: ['MERN Stack', 'Tailwind', 'Redux', 'JWT'],
-      techStack: ['MERN Stack', 'Tailwind', 'Redux', 'JWT'],
-      features: ['Product listing', 'filtering', 'authentication'],
       github: 'https://github.com/Prashant78793/Redtape',
       demo: '',
       color: '#8b5cf6',
       image: '/redtape.png',
+    },
+    {
+      id: 3,
+      title: 'Playedge - Sports Equipment E-Commerce',
+      year: 2025,
+      description: 'Frontend e-commerce platform with product listings, categories, cart & wishlist features.',
+      technologies: ['React.js', 'Tailwind CSS', 'JavaScript'],
+      github: 'https://github.com/Prashant78793/Playedge',
+      demo: '',
+      color: '#f43f5e', // Red-pink
+      image: '/playedge.png',
     },
   ];
 
@@ -187,31 +194,33 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* 3D Project Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative h-96 mb-4"
-        >
-          <Canvas camera={{ position: [0, 0, 12] }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            {projects.map((project, index) => (
-              <ProjectCube3D
-                key={project.id}
-                position={[
-                  (index % 2 === 0 ? -2 : 2) * 3,
-                  (index < 2 ? 1 : -1) * 2,
-                  0
-                ]}
-                project={project}
-                color={project.color}
-                onProjectClick={() => handleProjectClick(project)}
-              />
-            ))}
-          </Canvas>
-        </motion.div>
+       {/* 3D Project Grid */}
+<motion.div
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  className="relative h-[400px] sm:h-[350px] md:h-[300px] lg:h-[280px] mb-4"
+>
+  <Canvas camera={{ position: [0, 0, 16], fov: 60 }}>
+    <ambientLight intensity={0.5} />
+    <pointLight position={[10, 10, 10]} />
+
+    {projects.map((project, index) => (
+      <ProjectCube3D
+        key={project.id}
+        position={[
+          index * 6 - (projects.length - 1) * 3, // add spacing (6 units apart)
+          0,
+          0,
+        ]}
+        project={project}
+        color={project.color}
+        onProjectClick={() => handleProjectClick(project)}
+      />
+    ))}
+  </Canvas>
+</motion.div>
+
 
         {/* Project Cards Grid */}
         <motion.div
@@ -266,8 +275,6 @@ const Projects = () => {
                     </span>
                   )}
                 </div>
-
-                {/* No action buttons, card is clickable */}
               </div>
             </motion.div>
           ))}
@@ -284,4 +291,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;

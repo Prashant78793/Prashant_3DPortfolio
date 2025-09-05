@@ -49,7 +49,7 @@ const Hero = () => {
             style={{ width: 320, height: 320, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             <img
-              src="/prashant%20.jpg"
+              src="/prashant1%20.jpg"
               alt="Prashant Kumar"
               style={{ width: 300, height: 300, objectFit: 'cover', borderRadius: '50%', boxShadow: '0 8px 32px 0 rgba(14,165,233,0.25)' }}
             />
@@ -113,7 +113,7 @@ I'm a Full Stack Developer with 1+ years of experience building responsive, user
 
             <a
               href="/resume%20prashant.pdf"
-              download="Prashant_Kumar_Resume.pdf"
+              download="Resume (2).pdf"
               className="px-8 py-4 border-2 border-primary-600 text-primary-400 hover:bg-primary-600 hover:text-white font-semibold rounded-lg transition-colors flex items-center gap-2 no-underline"
               target="_blank"
               rel="noopener noreferrer"

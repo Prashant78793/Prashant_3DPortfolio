@@ -44,18 +44,36 @@ const Experience = () => {
   const experiences = [
     {
       id: 1,
+      title: 'Web Development Intern',
+      company: 'InternPe',
+      location: 'Jaipur, India',
+      period: 'July–Aug 2025',
+      description:
+        'Worked on responsive design, React.js projects, state management, and API integration, improving interactivity and performance.',
+      technologies: ['React.js', 'Tailwind CSS', 'JavaScript', 'REST API'],
+      color: '#34d399', // Green
+      achievements: [
+        'Learned and implemented advanced frontend concepts',
+        'Worked on multiple projects using React.js, Tailwind CSS, JavaScript',
+        'Integrated RESTful APIs and handled real-time data rendering',
+        'Implemented reusable components and integrated animations',
+      ],
+    },
+    {
+      id: 2,
       title: 'Frontend Developer Intern',
-      company: 'DevSkillHub',
-      location: 'Remote',
+      company: 'DevSkill Hub',
+      location: 'Bengaluru, Karnataka',
       period: 'July–Aug 2024',
-      description: 'Built responsive UI, implemented React components, improved load time, and used Git, Chrome DevTools, Postman.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'Git', 'Chrome DevTools', 'Postman'],
+      description:
+        'Developed responsive UI, implemented React components, optimized performance, and improved load times by 25%.',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'Git', 'Postman'],
       color: '#facc15', // Yellow
       achievements: [
-        'Built responsive UI with HTML, CSS, JavaScript',
-        'Implemented React components & optimized performance',
-        'Improved load time by 25%, added lazy loading',
-        'Used Git, Chrome DevTools, Postman',
+        'Developed and maintained responsive user interfaces',
+        'Implemented React.js components & optimized performance',
+        'Improved load time by 25% with lazy loading',
+        'Used Git, GitHub, and debugging tools for UI/UX fixes',
       ],
     },
   ];
@@ -130,7 +148,10 @@ const Experience = () => {
                   onClick={() => setSelectedExp(selectedExp === exp.id ? null : exp.id)}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute left-6 top-6 w-4 h-4 bg-[#facc15] rounded-full" />
+                  <div
+                    className="absolute left-6 top-6 w-4 h-4 rounded-full"
+                    style={{ backgroundColor: exp.color }}
+                  />
 
                   <div className="ml-12">
                     {/* Header */}
