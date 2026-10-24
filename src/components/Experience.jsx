@@ -40,40 +40,106 @@ const FlipCard3D = ({ position, frontText, backText, color }) => {
   );
 };
 
+const ExperienceWires = () => {
+  const wires = [
+    { id: 'full-time', color: '#34d399', sourceY: 150, endY: 150, path: 'M 280 150 C 375 150, 440 150, 505 150' },
+    { id: 'trainee', color: '#60a5fa', sourceY: 220, endY: 505, path: 'M 280 220 C 375 260, 425 435, 505 505' },
+    { id: 'intern', color: '#facc15', sourceY: 290, endY: 835, path: 'M 280 290 C 375 370, 425 700, 505 835' },
+  ];
+
+  return (
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-20 hidden h-full w-full lg:block"
+      viewBox="0 0 1000 1000"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <filter id="wire-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      {wires.map((wire) => (
+        <g key={wire.id}>
+          <path d={wire.path} fill="none" stroke={wire.color} strokeOpacity="0.16" strokeWidth="8" />
+          <path d={wire.path} fill="none" stroke={wire.color} strokeOpacity="0.8" strokeWidth="1.5" strokeDasharray="7 8" />
+          <circle cx="280" cy={wire.sourceY} r="5" fill={wire.color} filter="url(#wire-glow)" />
+          <circle cx="505" cy={wire.endY} r="6" fill={wire.color} filter="url(#wire-glow)">
+            <animate attributeName="r" values="5;8;5" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+          <circle r="5" fill={wire.color} filter="url(#wire-glow)">
+            <animateMotion dur="2.8s" begin="0.2s" repeatCount="indefinite" path={wire.path} />
+          </circle>
+        </g>
+      ))}
+    </svg>
+  );
+};
+
 const Experience = () => {
   const experiences = [
     {
       id: 1,
-      title: 'Web Development Intern',
-      company: 'InternPe',
-      location: 'Jaipur, India',
-      period: 'July–Aug 2025',
+      title: 'Software Engineer | Full-Time',
+      company: 'Ascella Infosec',
+      logo: '/ascella.jpg',
+      website: 'https://ascella.group/',
+      location: 'Remote',
+      period: 'Jan 2026– Oct 2026',
       description:
-        'Worked on responsive design, React.js projects, state management, and API integration, improving interactivity and performance.',
-      technologies: ['React.js', 'Tailwind CSS', 'JavaScript', 'REST API'],
-      color: '#34d399', // Green
+        'Improving Next.js performance, SEO, and scalability while building responsive luxury fashion e-commerce platforms with optimized APIs and PostgreSQL integration.',
+      technologies: ['Next.js', 'SEO', 'PostgreSQL', 'E-Commerce'],
+      color: '#34d399',
       achievements: [
-        'Learned and implemented advanced frontend concepts',
-        'Worked on multiple projects using React.js, Tailwind CSS, JavaScript',
-        'Integrated RESTful APIs and handled real-time data rendering',
-        'Implemented reusable components and integrated animations',
+        'Improved Next.js performance by 30% using lazy loading, code splitting, and image optimization',
+        'Implemented optimized metadata, sitemaps, canonical URLs, and structured data for SEO',
+        'Optimized routing, caching, and API requests for better scalability',
+        'Developed responsive luxury fashion platforms with dynamic products',
+        'Integrated PostgreSQL and optimized APIs for efficient data retrieval',
       ],
     },
     {
       id: 2,
-      title: 'Frontend Developer Intern',
-      company: 'DevSkill Hub',
-      location: 'Bengaluru, Karnataka',
-      period: 'July–Aug 2024',
+      title: 'Software Engineer Trainee',
+      company: 'Ascella Infosec',
+      logo: '/ascella.jpg',
+      website: 'https://ascella.group/',
+      location: 'Remote',
+      period: 'Dec 2025–Jan 2026',
       description:
-        'Developed responsive UI, implemented React components, optimized performance, and improved load times by 25%.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'React', 'Git', 'Postman'],
-      color: '#facc15', // Yellow
+        'Built responsive web interfaces and interactive application features using React.js, Next.js, Tailwind CSS, and REST APIs.',
+      technologies: ['React.js', 'Next.js', 'Tailwind CSS', 'REST APIs'],
+      color: '#60a5fa',
       achievements: [
-        'Developed and maintained responsive user interfaces',
-        'Implemented React.js components & optimized performance',
-        'Improved load time by 25% with lazy loading',
-        'Used Git, GitHub, and debugging tools for UI/UX fixes',
+        'Built responsive web interfaces using React.js, Next.js, and Tailwind CSS',
+        'Integrated REST APIs, authentication flows, and dynamic data features',
+        'Collaborated on debugging, testing, and code optimization',
+        'Followed Git-based development workflows for maintainable code',
+      ],
+    },
+    {
+      id: 3,
+      title: 'Web Development Intern',
+      company: 'InternPe',
+      logo: '/internpe.jpg',
+      website: 'https://internpe.in/',
+      location: 'Jaipur, India',
+      period: 'July 2025–Aug 2025',
+      description:
+        'Developed reusable React.js components, responsive interfaces, REST APIs, and MongoDB schemas while contributing to performance improvements.',
+      technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Git'],
+      color: '#facc15',
+      achievements: [
+        'Worked on 20+ reusable React.js components and responsive UI for different web pages',
+        'Developed and integrated REST APIs using Node.js and Express.js',
+        'Created MongoDB schemas and handled basic CRUD operations',
+        'Used Git for version control and collaborated on debugging and testing',
+        'Improved application performance through frontend and API optimizations',
       ],
     },
   ];
@@ -99,13 +165,14 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="relative grid items-start gap-12 lg:grid-cols-2">
+          <ExperienceWires />
           {/* Left Column - 3D Cards */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative h-96"
+            className="relative z-10 h-96"
           >
             <Canvas camera={{ position: [0, 0, 10] }}>
               <ambientLight intensity={0.5} />
@@ -127,7 +194,7 @@ const Experience = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="relative z-10 space-y-8"
           >
             {experiences.map((exp, index) => (
               <motion.div
@@ -147,11 +214,21 @@ const Experience = () => {
                   className="glass-effect p-6 rounded-lg relative"
                   onClick={() => setSelectedExp(selectedExp === exp.id ? null : exp.id)}
                 >
-                  {/* Timeline Dot */}
-                  <div
-                    className="absolute left-6 top-6 w-4 h-4 rounded-full"
-                    style={{ backgroundColor: exp.color }}
-                  />
+                  {/* Company Logo */}
+                  <a
+                    href={exp.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Visit ${exp.company} website`}
+                    onClick={(event) => event.stopPropagation()}
+                    className="absolute left-4 top-5 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
+                  >
+                    <img
+                      src={exp.logo}
+                      alt={`${exp.company} logo`}
+                      className="w-8 h-8 rounded-full object-cover border-2 border-slate-600 transition-transform hover:scale-110"
+                    />
+                  </a>
 
                   <div className="ml-12">
                     {/* Header */}

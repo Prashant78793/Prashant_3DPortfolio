@@ -91,7 +91,7 @@ const Hero = () => {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="text-lg text-gray-400 mb-8 max-w-xl leading-relaxed"
           >
-I'm a Full Stack Developer with 1+ years of experience building responsive, user-friendly web applications. I work across the full stack to create smooth, scalable solutions. Recently, I’ve been exploring AI integration to enhance web functionality and user experience. I enjoy solving real-world problems through clean code and thoughtful development.
+I'm a Software Engineer and Full Stack Developer who enjoys turning ideas into useful web products. I work with React.js, Next.js, TypeScript, Node.js, REST APIs, and databases such as MongoDB and PostgreSQL to build responsive and reliable applications. I also like exploring AI-powered features that make products more practical, faster, and easier to use.
           </motion.p>
 
           {/* Buttons */}
@@ -112,8 +112,8 @@ I'm a Full Stack Developer with 1+ years of experience building responsive, user
             </motion.button>
 
             <a
-              href="/resume%20prashant.pdf"
-              download="Resume (2).pdf"
+              href="/prashant_24oct2026.pdf"
+              download="prashant_24oct2026.pdf"
               className="px-8 py-4 border-2 border-primary-600 text-primary-400 hover:bg-primary-600 hover:text-white font-semibold rounded-lg transition-colors flex items-center gap-2 no-underline"
               target="_blank"
               rel="noopener noreferrer"

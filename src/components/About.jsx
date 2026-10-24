@@ -4,12 +4,28 @@ import { Canvas } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 import { Box, Text } from '@react-three/drei';
 import { Html } from '@react-three/drei';
-import { Code, Palette, Zap } from 'lucide-react';
-// Import react-icons for tech stack icons
-import { FaReact, FaJs, FaHtml5, FaNodeJs, FaUsers } from 'react-icons/fa';
-import { SiTailwindcss, SiExpress, SiMongodb } from 'react-icons/si';
-import { FaGitAlt, FaGithub } from 'react-icons/fa';
-import { SiPostman, SiVscodium } from 'react-icons/si';
+import { Bot, Code, Database, GitBranch, Palette, Server, Zap } from 'lucide-react';
+import { FaGithub, FaJava, FaJs, FaNodeJs, FaPython, FaReact, FaUsers } from 'react-icons/fa';
+import {
+  SiBootstrap,
+  SiExpress,
+  SiFastapi,
+  SiFirebase,
+  SiGithubactions,
+  SiGraphql,
+  SiLangchain,
+  SiMongodb,
+  SiMui,
+  SiMysql,
+  SiN8N,
+  SiNextdotjs,
+  SiPostgresql,
+  SiPostman,
+  SiRedux,
+  SiSocketdotio,
+  SiSupabase,
+  SiTypescript,
+} from 'react-icons/si';
 
 // 3D Skill Cube Component
 const SkillCube = function({ position, color, icon: Icon }) {
@@ -65,9 +81,12 @@ const education = {
 
 // Skills Section
 const skills = {
-  languages: ['Java', 'C++', 'JavaScript', 'SQL', 'MongoDB'],
-  frameworks: ['React.js', 'Node.js', 'Express.js', 'Tailwind CSS', 'HTML5', 'CSS3'],
-  tools: ['Git', 'GitHub', 'VS Code', 'Postman', 'Chrome DevTools', 'IntelliJ'],
+  languages: ['Python', 'JavaScript (ES6+)', 'TypeScript', 'Java'],
+  frameworks: ['React.js', 'Redux', 'React Native', 'Next.js', 'Bootstrap', 'Material UI'],
+  backend: ['Node.js', 'Express.js', 'REST APIs', 'GraphQL', 'Socket.IO'],
+  agenticAi: ['LangChain', 'LangGraph', 'LangSmith', 'n8n'],
+  databases: ['MongoDB', 'MySQL', 'PostgreSQL', 'Firebase Firestore', 'Supabase'],
+  tools: ['Git', 'GitHub', 'GitHub Actions', 'CI/CD', 'Postman', 'FastAPI (Basic)', 'SDLC/STLC'],
 };
 
 // Coursework
@@ -86,61 +105,113 @@ const extras = [
   'Runner-up in SEGA Football 2022',
 ];
 
-// Icon color map for tech stack
 const techIconColors = {
-  React: '#61DAFB',
-  JavaScript: '#F7DF1E',
-  'Tailwind CSS': '#38BDF8',
-  HTML5: '#E34F26',
-  'Node.js': '#3C873A',
-  'Express.js': '#888888',
+  Python: '#3776AB',
+  'JavaScript (ES6+)': '#F7DF1E',
+  TypeScript: '#3178C6',
+  Java: '#ED8B00',
+  'React.js': '#61DAFB',
+  Redux: '#764ABC',
+  'React Native': '#61DAFB',
+  'Next.js': '#FFFFFF',
+  Bootstrap: '#7952B3',
+  'Material UI': '#007FFF',
+  'Node.js': '#339933',
+  'Express.js': '#FFFFFF',
+  'REST APIs': '#38BDF8',
+  GraphQL: '#E10098',
+  'Socket.IO': '#FFFFFF',
+  LangChain: '#1C3C3C',
+  LangGraph: '#5B5BD6',
+  LangSmith: '#F59E0B',
+  n8n: '#EA4B71',
   MongoDB: '#47A248',
+  MySQL: '#4479A1',
+  PostgreSQL: '#4169E1',
+  'Firebase Firestore': '#FFCA28',
+  Supabase: '#3FCF8E',
+  Git: '#F05032',
+  GitHub: '#FFFFFF',
+  'GitHub Actions': '#2088FF',
+  'CI/CD': '#14B8A6',
+  Postman: '#FF6C37',
+  'FastAPI (Basic)': '#009688',
+  'SDLC/STLC': '#F59E0B',
 };
-
-// Add icon colors for Dev Tools
-techIconColors.Git = '#F05032';
-techIconColors.GitHub = '#181717';
-techIconColors['Postman'] = '#FF6C37';
-techIconColors['VS Code'] = '#007ACC';
 
 const About = function() {
   const skills = [
     {
-      name: 'Frontend',
+      name: 'Languages',
       icon: Code,
       color: '#0ea5e9',
       techIcons: [
-        { icon: FaReact, label: 'React' },
-        { icon: FaJs, label: 'JavaScript' },
-        { icon: SiTailwindcss, label: 'Tailwind CSS' },
-        { icon: FaHtml5, label: 'HTML5' },
+        { icon: FaPython, label: 'Python' },
+        { icon: FaJs, label: 'JavaScript (ES6+)' },
+        { icon: SiTypescript, label: 'TypeScript' },
+        { icon: FaJava, label: 'Java' },
       ],
     },
     {
-      name: 'Design',
-      icon: Palette,
+      name: 'Frontend',
+      icon: Code,
       color: '#8b5cf6',
-      description: 'UI/UX, Figma, Adobe',
+      techIcons: [
+        { icon: FaReact, label: 'React.js' },
+        { icon: SiRedux, label: 'Redux' },
+        { icon: FaReact, label: 'React Native' },
+        { icon: SiNextdotjs, label: 'Next.js' },
+        { icon: SiBootstrap, label: 'Bootstrap' },
+        { icon: SiMui, label: 'Material UI' },
+      ],
     },
     {
       name: 'Backend',
-      icon: Zap,
+      icon: Server,
       color: '#10b981',
       techIcons: [
         { icon: FaNodeJs, label: 'Node.js' },
         { icon: SiExpress, label: 'Express.js' },
+        { icon: Server, label: 'REST APIs' },
+        { icon: SiGraphql, label: 'GraphQL' },
+        { icon: SiSocketdotio, label: 'Socket.IO' },
+      ],
+    },
+    {
+      name: 'Agentic AI',
+      icon: Bot,
+      color: '#f59e0b',
+      techIcons: [
+       
+        { icon: SiLangchain, label: 'LangGraph' },
+        { icon: SiLangchain, label: 'LangSmith' },
+        { icon: SiN8N, label: 'n8n' },
+      ],
+    },
+    {
+      name: 'Databases',
+      icon: Database,
+      color: '#ef4444',
+      techIcons: [
         { icon: SiMongodb, label: 'MongoDB' },
+        { icon: SiMysql, label: 'MySQL' },
+        { icon: SiPostgresql, label: 'PostgreSQL' },
+        { icon: SiFirebase, label: 'Firebase Firestore' },
+        { icon: SiSupabase, label: 'Supabase' },
       ],
     },
     {
       name: 'Dev Tools',
-      icon: FaUsers,
-      color: '#f59e0b',
+      icon: GitBranch,
+      color: '#14b8a6',
       techIcons: [
-        { icon: FaGitAlt, label: 'Git' },
+        { icon: GitBranch, label: 'Git' },
         { icon: FaGithub, label: 'GitHub' },
+        { icon: SiGithubactions, label: 'GitHub Actions' },
+        { icon: GitBranch, label: 'CI/CD' },
         { icon: SiPostman, label: 'Postman' },
-        { icon: SiVscodium, label: 'VS Code' },
+        { icon: SiFastapi, label: 'FastAPI (Basic)' },
+
       ],
     },
   ];
@@ -213,7 +284,7 @@ const About = function() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-lg text-gray-300 leading-relaxed"
             >
-              I'm a dedicated Full Stack Developer with 1+ years of experience crafting modern, scalable web applications. What began as a simple curiosity about technology quickly turned into a passion for building meaningful, user-focused digital products. Outside of coding, I enjoy staying updated with emerging technologies, exploring AI tools, and sharing knowledge with upcoming developers. I’m always looking for new challenges that push me to grow and create impact through tech.
+              I'm Prashant Kumar, a Software Engineer and Full Stack Developer specializing in React.js, Next.js, TypeScript, Node.js, Express.js, REST APIs, and modern database systems. I build fast, responsive, and scalable web applications, including AI-powered products, using clean architecture and user-focused design. My experience with MongoDB, PostgreSQL, Supabase, Git, and cloud-ready development helps turn complex ideas into reliable digital experiences.
             </motion.p>
 
             
@@ -232,21 +303,16 @@ const About = function() {
                   className="glass-effect p-4 rounded-lg"
                 >
                   <div className="flex items-center gap-3">
-                    <skill.icon size={24} className="text-primary-400" />
+                    <skill.icon size={24} style={{ color: skill.color }} />
                     <div>
                       <h3 className="font-semibold text-white">{skill.name}</h3>
-                      {/* Show icons for Frontend and Backend */}
-                      {skill.techIcons ? (
-                        <div className="flex gap-2 mt-1">
-                          {skill.techIcons.map(({ icon: Icon, label }) => (
-                            <span key={label} title={label} className="text-xl" style={{ color: techIconColors[label] || '#38bdf8' }}>
-                              <Icon />
-                            </span>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-sm text-gray-400">{skill.description}</p>
-                      )}
+                      <div className="flex flex-wrap gap-3 mt-2">
+                        {skill.techIcons.map(({ icon: Icon, label }) => (
+                          <span key={label} title={label} aria-label={label} className="text-xl transition-transform hover:scale-125" style={{ color: techIconColors[label] }}>
+                            <Icon />
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>

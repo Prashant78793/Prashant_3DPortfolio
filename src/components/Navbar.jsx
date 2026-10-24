@@ -47,7 +47,7 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-40 glass-effect"
+      className="fixed top-0 left-0 right-0 z-40 isolate bg-slate-800 glass-effect"
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">

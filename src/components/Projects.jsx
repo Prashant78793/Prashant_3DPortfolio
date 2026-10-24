@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
-import { Box, Html } from '@react-three/drei';
+import { Box, Text } from '@react-three/drei';
 import { ExternalLink, Github, X, Eye } from 'lucide-react';
 
 // 3D Project Cube Component
 const ProjectCube3D = ({ position, project, color, onProjectClick }) => {
+  const cubeTitle = project.cubeTitle || [project.title];
   const [spring, api] = useSpring(() => ({
     rotation: [0, 0, 0],
     scale: 1,
@@ -24,14 +25,23 @@ const ProjectCube3D = ({ position, project, color, onProjectClick }) => {
 
   return (
     <animated.mesh position={position} rotation={spring.rotation} scale={spring.scale} onClick={handleClick}>
-      <Box args={[2.8, 2.8, 0.2]}>
+      <Box args={[3.8, 3.8, 0.2]}>
         <meshStandardMaterial color={color} />
       </Box>
-      <Html position={[0, 0, 0.16]} center>
-        <div className="text-center text-white text-sm p-2">
-          <div className="font-bold mb-1">{project.title}</div>
-        </div>
-      </Html>
+      <Text
+        position={[0, 0, 0.16]}
+        fontSize={0.5}
+        lineHeight={1.1}
+        maxWidth={3.35}
+        textAlign="center"
+        anchorX="center"
+        anchorY="middle"
+        color="white"
+        outlineWidth={0.015}
+        outlineColor="#0f172a"
+      >
+        {cubeTitle.join('\n')}
+      </Text>
     </animated.mesh>
   );
 };
@@ -129,36 +139,39 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Gym Equipment E-Commerce',
-      year: 2025,
-      description: 'Admin Dashboard for e-commerce with inventory, orders, filtering & sorting features.',
-      technologies: ['React', 'JavaScript', 'Tailwind CSS', 'MongoDB'],
+      title: 'LiftWorks - Gym Equipment E-Commerce',
+      cubeTitle: ['LiftWorks', 'Gym Equipment'],
+      year: 2026,
+      description: 'AI-powered gym equipment e-commerce platform with secure authentication, voice-enabled navigation, and scalable product management.',
+      technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
       github: 'https://github.com/Prashant78793/gym-equipment-ecommerce.github.io',
-      demo: '',
+      demo: 'https://ai-gym-equipment.netlify.app/',
       color: '#0ea5e9',
       image: '/Gym.png',
     },
     {
       id: 2,
-      title: 'Redtape Clone',
-      year: 2024,
-      description: 'MERN Stack e-commerce clone with product listing, filtering, and authentication.',
-      technologies: ['MERN Stack', 'Tailwind', 'Redux', 'JWT'],
-      github: 'https://github.com/Prashant78793/Redtape',
-      demo: '',
+      title: 'AI Form Builder - Dynamic Form Creation Platform',
+      cubeTitle: ['AI Form Builder', 'Dynamic Forms'],
+      year: 2026,
+      description: 'AI-powered form generation platform that creates responsive forms from natural language inputs and streamlines form creation efficiency.',
+      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'REST APIs', 'Clerk'],
+      github: 'https://github.com/Prashant78793/Form-builder-using-ai',
+      demo: 'https://form-scratch-gamma.vercel.app/',
       color: '#8b5cf6',
-      image: '/redtape.png',
+      image: '/ai1.png',
     },
     {
       id: 3,
-      title: 'Playedge - Sports Equipment E-Commerce',
-      year: 2025,
-      description: 'Frontend e-commerce platform with product listings, categories, cart & wishlist features.',
-      technologies: ['React.js', 'Tailwind CSS', 'JavaScript'],
-      github: 'https://github.com/Prashant78793/Playedge',
+      title: 'Redtape Clone',
+      cubeTitle: ['Redtape', 'Clone'],
+      year: 2024,
+      description: 'MERN Stack e-commerce clone with product listing, filtering, authentication, and responsive shopping experiences.',
+      technologies: ['MERN Stack', 'Tailwind CSS', 'Redux', 'JWT'],
+      github: 'https://github.com/Prashant78793/Redtape',
       demo: '',
-      color: '#f43f5e', // Red-pink
-      image: '/playedge.png',
+      color: '#f43f5e',
+      image: '/redtape.png',
     },
   ];
 
@@ -195,31 +208,7 @@ const Projects = () => {
         </motion.div>
 
        {/* 3D Project Grid */}
-<motion.div
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  className="relative h-[400px] sm:h-[350px] md:h-[300px] lg:h-[280px] mb-4"
->
-  <Canvas camera={{ position: [0, 0, 16], fov: 60 }}>
-    <ambientLight intensity={0.5} />
-    <pointLight position={[10, 10, 10]} />
 
-    {projects.map((project, index) => (
-      <ProjectCube3D
-        key={project.id}
-        position={[
-          index * 6 - (projects.length - 1) * 3, // add spacing (6 units apart)
-          0,
-          0,
-        ]}
-        project={project}
-        color={project.color}
-        onProjectClick={() => handleProjectClick(project)}
-      />
-    ))}
-  </Canvas>
-</motion.div>
 
 
         {/* Project Cards Grid */}
@@ -241,12 +230,15 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div 
-                className="h-48 bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center relative group"
+                className="relative h-48 overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 group"
                 style={{ background: `linear-gradient(135deg, ${project.color}40, ${project.color}80)` }}
               >
-                <div className="text-white text-center">
-                  <Eye size={48} className="mx-auto mb-2 opacity-50" />
-                </div>
+                <img
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  loading="lazy"
+                  className="block h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 cursor-pointer">
                   <span className="text-white text-base font-semibold">Click to view</span>
                 </div>
@@ -254,7 +246,21 @@ const Projects = () => {
 
               {/* Project Info */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {project.demo ? (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(event) => event.stopPropagation()}
+                      className="transition-colors hover:text-primary-400"
+                    >
+                      {project.title}
+                    </a>
+                  ) : (
+                    project.title
+                  )}
+                </h3>
                 <p className="text-gray-400 text-sm mb-4 line-clamp-3">
                   {project.description}
                 </p>
